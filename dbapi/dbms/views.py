@@ -16,9 +16,6 @@ class OrdenViewSet(viewsets.ModelViewSet):
     serializer_class = OrdenSerializer
 
     def perform_create(self, serializer):
-        print('aqui 1')
-        print('request: '+str(self.request.data))
-        print(self.request.data['id_usuario'][0])
         serializer.save(id_usuario=Usuario.objects.get(id_usuario=str(self.request.data['id_usuario'][0])))
 
 class OrdenDetalleViewSet(viewsets.ModelViewSet):
@@ -26,8 +23,6 @@ class OrdenDetalleViewSet(viewsets.ModelViewSet):
     serializer_class = OrdenDetalleSerializer
 
     def perform_create(self, serializer):
-        print('aqui 2')
-        print('request: '+str(self.request.data))
         serializer.save(id_orden=Orden.objects.get(id_orden=str(self.request.data['id_orden'][0])))
 
 class PromocionViewSet(viewsets.ModelViewSet):
