@@ -6,6 +6,8 @@ from django.db import models
 class Usuario(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     id_usuario = models.CharField(max_length=100, primary_key=True)
+    nombre = models.CharField(max_length=100)
+    contrasena = models.CharField(max_length=100)
     fecha_expiracion = models.DateTimeField()
 
 class Orden(models.Model):

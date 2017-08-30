@@ -6,7 +6,7 @@ class UsuarioSerializer(serializers.HyperlinkedModelSerializer):
     ordenes = serializers.HyperlinkedRelatedField(many=True, view_name='orden-detail', read_only=True)
     class Meta:
         model = Usuario
-        fields =  ('fecha_creacion', 'id_usuario', 'fecha_expiracion','ordenes')
+        fields =  ('fecha_creacion', 'id_usuario', 'fecha_expiracion','ordenes', 'nombre', 'contrasena')
 
 class OrdenSerializer(serializers.HyperlinkedModelSerializer):
     id_usuario = serializers.CharField(source='id_usuario.id_usuario')
