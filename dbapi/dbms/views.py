@@ -3,9 +3,11 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 import django_filters.rest_framework
+from django.shortcuts import get_object_or_404
 from dbms.models import *
 from dbms.serializers import *
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, generics, status
+from rest_framework.response import Response
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
@@ -14,14 +16,20 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         params = self.request.query_params
-        data = Usuario.objects.all()
         if 'nombre' in params:
-            data = data.filter(nombre=params['nombre'])
+            data = get_object_or_404(Usuario, nombre=params['nombre'])
+            if not (isinstance(data, Usuario)):
+                return data
 
         if 'contrasena' in params:
-            data = data.filter(contrasena=params['contrasena'])
+            data = get_object_or_404(Usuario, nombre=params['nombre'], contrasena=params['contrasena'])
+            if not (isinstance(data, Usuario)):
+                return data
 
-        return data
+        return [data]
+
+    print(queryset)
+
 
 class OrdenViewSet(viewsets.ModelViewSet):
     queryset = Orden.objects.all()
