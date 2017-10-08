@@ -23,12 +23,6 @@ pipeline {
             //    }
             //}
         }
-        stage('Stop Docker Container') {
-            agent any
-            steps {
-                sh 'sudo ./jobs/docker_remove.sh'
-            }
-        }
         stage('Run in Dev') {
             agent any
             steps {
